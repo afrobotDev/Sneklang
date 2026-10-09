@@ -1,1 +1,4 @@
 .clang-format
+tests/test_*
+!tests/test_*.c
+!tests/test_*.h
