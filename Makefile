@@ -1,7 +1,7 @@
 CC := gcc
 CFLAGS := -Wall -Wextra -std=c11 -I.
 
-LIB_SRCS := cBasics/welcome_to_mem.c cBasics/functions.c
+LIB_SRCS := cBasics/welcome_to_mem.c cBasics/functions.c cBasics/unittest_alpha.c cBasics/mathops.c
 
 TEST_DIR := tests
 TEST_SRCS := $(wildcard $(TEST_DIR)/test_*.c)
