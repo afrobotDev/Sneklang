@@ -30,6 +30,7 @@ static char *capture(int start, int end) {
     }
     buf[len] = '\0';
     fclose(tmp);
+    fprintf(stderr, "print_numbers(%d, %d) output:\n%s", start, end, buf);
     return buf;
 }
 
