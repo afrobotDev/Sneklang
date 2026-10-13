@@ -1,5 +1,5 @@
 #include "scale_coord.h"
 
-coordinate_t scale_coord(struct Coordinate c, int factor) {
-    return (struct Coordinate){.x = c.x * factor, .y = c.y * factor, .z = c.z * factor};
+coordinate_t scale_coord(coordinate_t c, int factor) {
+    return (coordinate_t){.x = c.x * factor, .y = c.y * factor, .z = c.z * factor};
 }
