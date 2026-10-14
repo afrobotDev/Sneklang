@@ -1,7 +1,7 @@
 CC := gcc
 CFLAGS := -Wall -Wextra -std=c11 -I.
 
-LIB_SRCS := cBasics/welcome_to_mem.c cBasics/functions.c cBasics/unittest_alpha.c cBasics/mathops.c cBasics/if_state.c cBasics/for_loop.c cBasics/while_loop.c cBasics/doWhile_loop.c Structs/structs_intro.c Structs/scale_coord.c Pointers/memory.c Pointers/coordinate.c
+LIB_SRCS := cBasics/welcome_to_mem.c cBasics/functions.c cBasics/unittest_alpha.c cBasics/mathops.c cBasics/if_state.c cBasics/for_loop.c cBasics/while_loop.c cBasics/doWhile_loop.c Structs/structs_intro.c Structs/scale_coord.c Pointers/memory.c Pointers/coordinate.c Pointers/pointers_basics.c
 
 TEST_DIR := tests
 TEST_SRCS := $(wildcard $(TEST_DIR)/test_*.c)
