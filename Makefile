@@ -6,6 +6,22 @@ LIB_SRCS := cBasics/welcome_to_mem.c cBasics/functions.c cBasics/unittest_alpha.
 TEST_DIR := tests
 TEST_SRCS := $(wildcard $(TEST_DIR)/test_*.c)
 
+# --- short helpers -----------------------------------------------------
+# make r FILE=Pointers/play_ground.c [ARGS=...]   compile+run any .c
+# make t T=memory                                 run one test suite
+# make t                                          run all test suites
+.PHONY: r t
+
+r:
+	@tmp=$$(mktemp /tmp/snkr_XXXXXX); \
+	$(CC) $(CFLAGS) -o $$tmp $(FILE) && $$tmp; st=$$?; rm -f $$tmp; exit $$st
+
+t: $(if $(T),$(TEST_DIR)/test_$(T),$(TEST_SRCS:.c=))
+	@if [ -n "$(T)" ]; then ./$(TEST_DIR)/test_$(T) --show-stderr; \
+	else for x in $(TEST_SRCS:.c=); do \
+	   echo "==> $$x"; ./$$x --show-stderr || exit 1; \
+	done; fi
+
 .PHONY: test clean
 test: $(TEST_SRCS:.c=)
 	@for t in $(TEST_SRCS:.c=); do echo "==> $$t"; ./$$t --show-stderr || exit 1; done
