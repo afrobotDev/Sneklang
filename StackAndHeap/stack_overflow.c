@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int main() {
-  const int pool_size = 1024 * 10;
+  const int pool_size = 1024 *  10;
   char snek_pool[pool_size];
   snek_pool[0] = 's';
   snek_pool[1] = 'n';
@@ -13,3 +13,4 @@ int main() {
   printf("Initial string: %s\n", snek_pool);
   return 0;
 }
+
