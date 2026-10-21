@@ -8,7 +8,6 @@ int main() {
   return 0;
 }
 
-// __attribute__((noinline)) helps the compiler behave; don't worry about it
 __attribute__((noinline)) void printMessageOne(void) {
   const char *message = "Dark mode?\n";
   printStackPointerDiff();
@@ -27,7 +26,6 @@ __attribute__((noinline)) void printMessageThree(void) {
   printf("%s\n", message);
 }
 
-// don't touch below this line
 
 void printStackPointerDiff(void) {
   static void *last_sp = NULL;
