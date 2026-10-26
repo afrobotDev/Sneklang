@@ -9,10 +9,11 @@ void stack_push(stack_t *stack, void *obj) {
 		void *modify_mem = realloc(stack->data, stack->capacity * sizeof(void *));
 		if (modify_mem == NULL) {
 			stack->capacity /= 2;
-			return;
+			exit(1);
 		}
 		stack->data = modify_mem;
 	}
 	stack->data[stack->count] = obj;
 	stack->count++;
+	return;
 }
