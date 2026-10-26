@@ -3,6 +3,15 @@
 #include <stdlib.h>
 #include <string.h>
 
+
+snek_object_t *new_snek_vector3(snek_object_t *x, snek_object_t *y, snek_object_t *z) {
+	if (x == NULL || y == NULL || z == NULL) { return NULL; }
+	snek_object_t *new_vector_obj = malloc(sizeof(snek_object_t));
+	if (new_vector_obj == NULL) { return NULL; }
+	new_vector_obj->kind = VECTOR3;
+	new_vector_obj->data.v_vector3 = (snek_vector_t){.x = x, .y = y, .z = z};
+	return new_vector_obj;
+}
 	
 snek_object_t *new_snek_string(char *value) {
 	snek_object_t ptr_str_obj = malloc(sizeof(snek_object_t));
