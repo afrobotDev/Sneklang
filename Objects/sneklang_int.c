@@ -39,8 +39,8 @@ snek_object_t *snek_add(snek_object_t *a, snek_object_t *b) {
 				}
 				int len_strings= snek_length(a) + snek_length(b) + 1;
 				char *string = calloc(len_strings, sizeof(char *));
-				strcat(a, b);
-				strcat(string, a);
+				strcat(a->data.v_string, b->data.v_string);
+				strcat(string, a->data.v_string);
 				snek_object_t *new_string_obj = new_snek_string(string);
 				free(string);
 				return new_string_obj;
@@ -66,7 +66,7 @@ snek_object_t *snek_add(snek_object_t *a, snek_object_t *b) {
 				}
 				for (int i = 0; i < b->data.v_array.size; i++) {
 					snek_object_t *obj_b = snek_array_get(b->data.v_array.elements, i);
-					snek_array_set(array_object, i, obj_b);
+					snek_array_set(array_object, i + a->data.v_array.size, obj_b);
 				}
 				return array_object;
 			}
