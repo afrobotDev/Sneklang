@@ -3,6 +3,79 @@
 #include <stdlib.h>
 #include <string.h>
 
+snek_object_t *snek_add(snek_object_t *a, snek_object_t *b) {
+	if (a == NULL || b == NULL) {
+		return NULL;
+	}
+	switch (a->kind) {
+		case INTEGER:
+			{
+				if (b->kind == INTEGER) {
+					int sum_integers = a->data.v_int + b->data.v_int;
+					return new_snek_integer(sum_integers);
+				} else if (b->kind == FLOAT) {
+					float sum_floats = (float)a->data.v_int + b->data.v_float;
+					return new_snek_float(sum_floats);
+				} else {
+					return NULL;
+				}
+			}
+		case FLOAT:
+			{
+				if (b->kind == FLOAT) {
+					float sum_floats = a->data.v_float + b->data.v_float;
+					return new_snek_float(sum_floats);
+				} else if (b->kind == INTEGER) {
+					float sum_floats = a->data.v_float + (float)b->data.v_int;
+					return new_snek_float(sum_floats);
+				} else {
+					return NULL;
+				}
+			}
+		case STRING:
+			{
+				if (b->kind != STRING) {
+					return NULL;
+				}
+				int len_strings= snek_length(a) + snek_length(b) + 1;
+				char *string = calloc(len_strings, sizeof(char *));
+				strcat(a, b);
+				strcat(string, a);
+				snek_object_t *new_string_obj = new_snek_string(string);
+				free(string);
+				return new_string_obj;
+			}
+		case VECTOR3:
+			{
+				if (b->kind != VECTOR3) {
+					return NULL;
+				}
+				snek_object_t *new_vector_obj = new_snek_vector3(snek_add(a->data.v_vector3.x, b->data.v_vector3.x), snek_add(a->data.v_vector3.y, b->data.v_vector3.y), snek_add(a->data.v_vector3.z, b->data.v_vector3.z));
+				return new_vector_obj;
+			}
+		case ARRAY:
+			{
+				if (b->kind != ARRAY) {
+					return NULL;
+				}
+				snek_object_t *array_object = new_snek_array(a->data.v_array.size + b->data.v_array.size);
+				for (int i = 0; i < a->data.v_array.size; i++) {
+					snek_object_t *obj_a = snek_array_get(a->data.v_array.elements, i);
+					snek_array_set(array_object, i, obj_a);
+
+				}
+				for (int i = 0; i < b->data.v_array.size; i++) {
+					snek_object_t *obj_b = snek_array_get(b->data.v_array.elements, i);
+					snek_array_set(array_object, i, obj_b);
+				}
+				return array_object;
+			}
+		default:
+			return NULL;
+
+	}
+}
+
 int snek_length(snek_object_t *obj) {
 	if (obj == NULL) {
 		return -1;
