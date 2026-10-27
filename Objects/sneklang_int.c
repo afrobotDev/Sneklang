@@ -3,6 +3,15 @@
 #include <stdlib.h>
 #include <string.h>
 
+snek_object_t *new_snek_array(size_t size) {
+	snek_object_t *new_array_obj = malloc(sizeof(snek_object_t));
+	if (new_array_obj == NULL) { return NULL; }
+	snek_object_t **ptr_array = calloc(size, sizeof(snek_object_t *));
+	new_array_obj->kind = ARRAY;
+	snek_array_t new_array = {.size = size, .elements = ptr_array}; 
+	new_array_obj->data = (snek_object_data_t){.v_array = new_array};
+	return new_array_obj;
+}
 
 snek_object_t *new_snek_vector3(snek_object_t *x, snek_object_t *y, snek_object_t *z) {
 	if (x == NULL || y == NULL || z == NULL) { return NULL; }
