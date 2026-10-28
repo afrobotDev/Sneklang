@@ -36,6 +36,10 @@ typedef struct SnekObject {
   int refcount;
 } snek_object_t;
 
+void refcount_inc(snek_object_t *obj);
+void refcount_dec(snek_object_t *obj);
+void refcount_free(snek_object_t *obj);
+
 snek_object_t *new_snek_integer(int value);
 snek_object_t *new_snek_float(float value);
 snek_object_t *new_snek_string(char *value);
@@ -43,8 +47,5 @@ snek_object_t *new_snek_vector3(snek_object_t *x, snek_object_t *y,
                                 snek_object_t *z);
 snek_object_t *new_snek_array(size_t size);
 snek_object_t *_new_snek_object(void);
-void refcount_inc(snek_object_t *obj);
-void refcount_dec(snek_object_t *obj);
-void refcount_free(snek_object_t *obj);
 snek_object_t *new_snek_vector3(snek_object_t *x, snek_object_t *y, snek_object_t *z);
 bool snek_array_set(snek_object_t *snek_obj, size_t index, snek_object_t *value);
