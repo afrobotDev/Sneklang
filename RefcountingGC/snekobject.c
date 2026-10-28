@@ -62,7 +62,7 @@ void refcount_free(snek_object_t *obj) {
 		refcount_dec(vec.y);
 		refcount_dec(vec.z);
 	} else if (obj->kind == ARRAY) {
-		snek_array_t arr = obj->data.v_array;
+		snek_array_t *arr = &obj->data.v_array;
 		for (size_t i = 0; i < arr.size; i++) {
 			refcount_dec(arr.elements[i]);
 		}
