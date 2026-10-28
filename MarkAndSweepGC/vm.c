@@ -2,6 +2,12 @@
 #include "snekobject.h"
 #include "stack.h"
 
+void frame_reference_object(frame_t *frame, snek_object_t *obj) {
+	if (frame == NULL || obj == NULL) { return; }
+	stack_push(frame->references, (void *)obj);
+
+}
+
 void vm_free(vm_t *vm) {
 	if (vm == NULL) { return; }
 	stack_t *frames = &vm->frames;
@@ -15,6 +21,7 @@ void vm_free(vm_t *vm) {
 		snek_object_free(objs->data[i]);
 	}
 	stack_free(objs);
+	free(vm);
 }
 
 void vm_track_object(vm_t *vm, snek_object_t *obj) {
