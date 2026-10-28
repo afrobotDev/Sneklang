@@ -1,3 +1,4 @@
+#include "stack.h"
 #include <stdbool.h>
 #include <stddef.h>
 
@@ -31,7 +32,7 @@ typedef union SnekObjectData {
 } snek_object_data_t;
 
 typedef struct SnekObject {
-  int refcount;
+  bool is_marked;
   snek_object_kind_t kind;
   snek_object_data_t data;
 } snek_object_t;
