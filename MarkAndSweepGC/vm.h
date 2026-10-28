@@ -1,4 +1,7 @@
+#pragma once
 #include "stack.h"
+#include "snekobject.h"
+
 typedef struct VirtualMachine {
   stack_t *frames;
   stack_t *objects;
@@ -13,6 +16,7 @@ void vm_free(vm_t *vm);
 
 void vm_frame_push(vm_t *vm, frame_t *frame);
 frame_t *vm_new_frame(vm_t *vm);
+void vm_track_object(vm_t *vm, snek_object_t *obj);
 
 void frame_free(frame_t *frame);
 
