@@ -1,4 +1,26 @@
 #include "vm.h"
+#include "snekobject.h"
+#include "stack.h"
+
+void vm_free(vm_t *vm) {
+	if (vm == NULL) { return; }
+	stack_t *frames = &vm->frames;
+	stack_t *objs = &vm->objects;
+	for (size_t i = 0; i < frames->count; i++) {
+		free_frame(frames->data[i]);
+	}
+	stack_free(frames);
+
+	for (size_t i = 0; i < objs->count; i++) {
+		snek_object_free(objs->data[i]);
+	}
+	stack_free(objs);
+}
+
+void vm_track_object(vm_t *vm, snek_object_t *obj) {
+	if (vm == NULL || obj == NULL) { return; }
+	stack_push(vm->objects, (void *)obj);
+}
 
 void vm_frame_push(vm_t *vm, frame_t *frame) {
 	if (vm == NULL || frame == NULL) { return; }
