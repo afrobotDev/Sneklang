@@ -2,6 +2,23 @@
 #include "snekobject.h"
 #include "stack.h"
 
+void vm_collect_garbage(vm_t *vm) {
+	mark(vm);
+	trace(vm);
+	sweep(vm);
+}
+
+void sweep(vm_t *vm) {
+	for (size_t i = 0; i < vm->objects->count; i++) {
+		snek_object_t *obj = vm->objects->data[i];
+		if (obj->is_marked == true) {
+			obj->is_marked == false);
+		}
+		snek_object_free(obj);	
+		obj = NULL;
+	}
+	stack_remove_nulls(vm->objects);
+}
 
 void trace(vm_t *vm) {
 	if (vm == NULL) { return; }
